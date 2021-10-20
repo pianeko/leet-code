@@ -22,39 +22,29 @@ func setListNode(l *ListNode) *ListNode {
 	return l.Next
 }
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	// calculate sum and set value to array
-	ansArray := []int{}
+	// calculate sum and set value to ListNode
+	ans := ListNode{0, nil}
+	next := &ans
 	carry := 0
-	for i := 0; l1 != nil || l2 != nil; i++ {
-		l1Val := setVal(l1)
-		l2Val := setVal(l2)
-		sum := l1Val + l2Val + carry
-		ansArray = append(ansArray, sum%10)
+	for !(l1 == nil && l2 == nil && carry == 0) {
+		tmp := &ListNode{0, nil}
+		sum := setVal(l1) + setVal(l2) + carry
+		tmp.Val = sum % 10
 		carry = sum / 10
+		next.Next = tmp
+		next = next.Next
 		l1 = setListNode(l1)
 		l2 = setListNode(l2)
 	}
-	// set the carry to the end of the array if the last calculation is carrying out
-	if carry == 1 {
-		ansArray = append(ansArray, carry)
-	}
 
-	// convert to ListNode from array
-	ans := ListNode{ansArray[0], nil}
-	tmp := &ans
-	for _, v := range ansArray[1:] {
-		tmp.Next = &ListNode{v, nil}
-		tmp = tmp.Next
-	}
-
-	return &ans
+	return ans.Next
 }
 
 //For simple test
 func toArray(l *ListNode) []int {
 	result := []int{}
 
-	for i := 0; l != nil; i++ {
+	for l != nil {
 		result = append(result, l.Val)
 		l = l.Next
 	}
