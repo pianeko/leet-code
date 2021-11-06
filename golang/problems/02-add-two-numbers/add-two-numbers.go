@@ -22,17 +22,24 @@ func setListNode(l *ListNode) *ListNode {
 	return l.Next
 }
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	// calculate sum and set value to ListNode
+	//calculate sum and set value to ListNode
 	ans := ListNode{0, nil}
+	//temporary variable where the pointer is stored
 	next := &ans
 	carry := 0
 	for !(l1 == nil && l2 == nil && carry == 0) {
+		//pointer to ListNode stored in Next
 		tmp := &ListNode{0, nil}
 		sum := setVal(l1) + setVal(l2) + carry
+		//ignore the carry and retrieve the value
 		tmp.Val = sum % 10
+		//retrieve the carry
 		carry = sum / 10
+		//set pointer to Next
 		next.Next = tmp
+		//set next pointer to temporary variable
 		next = next.Next
+		//set next pointer to each arg
 		l1 = setListNode(l1)
 		l2 = setListNode(l2)
 	}
