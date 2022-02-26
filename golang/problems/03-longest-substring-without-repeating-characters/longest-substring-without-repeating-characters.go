@@ -18,7 +18,7 @@ func lengthOfLongestSubstring(s string) int {
 		}
 		//add value
 		slice = append(slice, input)
-		//if the length of the slice is greater than the result, set the length
+		//if the length of the slice is greater than the result, set the length
 		if len(slice) > result {
 			result = len(slice)
 		}
